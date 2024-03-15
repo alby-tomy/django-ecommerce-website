@@ -9,6 +9,8 @@ class Customer(models.Model):
     
     def __str__(self):
         return self.name
+    
+    
 
 class Product(models.Model):
     name = models.CharField(max_length=200, null=True)
@@ -18,6 +20,14 @@ class Product(models.Model):
     
     def __str__(self):
         return str(self.name)
+    
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
     
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
